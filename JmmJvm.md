@@ -235,10 +235,6 @@ volatile的2个特性
 
 其中StoreLoad是万能的. 指令是mfence指令, 不过x86没实现, x86只有lfence和sfence
 
-其中
-
-lfence: 相当于LoadLoad
-
 * sfence
 
   相当于StoreStore, 强制所有在sfence指令之前的store指令，都在该sfence指令执行之前被执行，发送缓存失效信号，并把store buffer中的数据刷出到CPU的L1 Cache中；所有在sfence指令之后的store指令，都在该sfence指令执行之后被执行。即，禁止对sfence指令前后store指令的重排序跨越sfence指令，使所有Store Barrier之前发生的内存更新都是可见的。
@@ -248,4 +244,3 @@ lfence: 相当于LoadLoad
   lfence指令实现了Load Barrier，相当于LoadLoad Barriers。强制所有在lfence指令之后的load指令，都在该lfence指令执行之后被执行，并且一直等到load buffer被该CPU读完才能执行之后的load指令（发现缓存失效后发起的刷入）。即，禁止对lfence指令前后load指令的重排序跨越lfence指令，配合Store Barrier，使所有Store Barrier之前发生的内存更新，对Load Barrier之后的load操作都是可见的。
 
   
-
